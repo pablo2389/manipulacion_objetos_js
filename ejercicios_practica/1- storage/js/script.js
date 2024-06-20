@@ -48,9 +48,9 @@ ingresarButton.addEventListener("click", () => {
     emailLogeado.textContent = `Email: ${email}`;
 
   
-});
+});  
 
-/* 2 - Enunciado
+/*Enunciado
 
 - Al comenzar el script se debe verificar si en memoria se encuentran
 almacenados los datos de "usuario" y "email".
@@ -58,38 +58,53 @@ almacenados los datos de "usuario" y "email".
 "usuarioLogeado" y "emailLogeado".
 - Se debe ocultar la sección "login" (puede usar la clase CSS hidden ya creada)
 y deberá revelar la sección "logout" (quitar la clase hidden).
-*/
-/* const botoningresar = document.getElementById("btnIngresar");
-const usuario = document.getElementById("usuario");
-const email = document.getElementById("email");
-const usuarioLogeado = document.getElementById("usuariologeado");
-const emailLogeado = document.getElementById("emailLogeado");
+*/{
+    
+    let usuario = document.getElementById("usuario");
+    let email = document.getElementById("email");
+    let boton = document.getElementById("btnIngresar");
+    let usuarioLogeado = document.getElementById("usuarioLogeado");
+    let emailLogeado = document.getElementById("emailLogeado");
+    let login = document.getElementById("login");
+    let logout = document.getElementById("logout");
+    let salida = document.getElementById("btnSalir");
 
-const usuarioAlmacenado = localStorage.getItem("usuario");
-const emaiLAlmacenado = localStorage.getItem("email");
-if(usuarioAlmacenado&& emaiLAlmacenado){
-    usuarioLogeado.textContent = `¡bienvenido, ${usuarioAlmacenado}!`
-    emailLogeado.textContent = `Email: ${emaiLAlmacenado}`;
-
-    seccionLogin.classList.add("hidden");
-    seccionLogout.classList.remove("hidden");
-    botonIngresar.addEventListener("click", function() {
+    
+    boton.addEventListener("click", () => {
         
-        const usuario = inputUsuario.value;
-        const email = inputEmail.value;
+        localStorage.setItem("usuario", usuario.value);
+        localStorage.setItem("email", email.value);
 
-        localStorage.setItem("usuario", usuario);
-        localStorage.setItem("email", email);
-    
-  
-        usuarioLogeado.textContent = `¡Bienvenido, ${usuario}!`;
-        emailLogeado.textContent = `Email: ${email}`;
-    
-        seccionLogin.classList.add("hidden");
-        seccionLogout.classList.remove("hidden");
+        
+        usuarioLogeado.textContent = localStorage.getItem("usuario");
+        emailLogeado.textContent = localStorage.getItem("email");
+
+        
+        login.classList.add("hidden");
+        logout.classList.remove("hidden");
     });
 
-}  
+    
+    salida.addEventListener("click", () => {
+        
+        localStorage.removeItem("usuario");
+        localStorage.removeItem("email");
+
+        
+        usuarioLogeado.textContent = '';
+        emailLogeado.textContent = '';
+
+        
+        login.classList.remove("hidden");
+        logout.classList.add("hidden");
+
+        
+        window.location.reload();
+    });
+};
+
+
+
 
 /* 3 - Enunciado
 
@@ -100,14 +115,15 @@ volverse a cargar debería aparecer nuevamente la sección de bienvenida
 ya que no debería haber más datos en memoria cargados.
 
 */
-const botonSalir = document.getElementById("btnSalir");
+   let botonSalir = document.getElementById("btnSalir");
 
 
-botonSalir.addEventListener("click", function() {
+botonSalir.addEventListener("click", () =>{
 
     localStorage.removeItem("usuario");
     localStorage.removeItem("email");
-
+ usuarioLogeado ='';
+ emailLogeado =``;
 
     window.location.reload();
 });
